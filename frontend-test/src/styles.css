@@ -1,0 +1,101 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; min-width: 320px; background: #fff; }
+button, input { font: inherit; }
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 16px 60px;
+}
+
+.game-card { width: min(100%, 700px); text-align: center; }
+.game-card h1 { margin: 0 0 18px; font-size: 22px; font-weight: 700; }
+
+.controls {
+  width: 78px;
+  margin: 0 auto 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+}
+
+.controls label { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.controls label span { font-size: 10px; }
+.controls input {
+  width: 100px;
+  height: 25px;
+  padding: 0 3px;
+  font-size: 10px;
+  border: 1px solid #bdbdbd;
+  border-radius: 1px;
+}
+
+.generate-button {
+  width: 80px;
+  min-height: 28px;
+  padding: 2px;
+  align-self: center;
+  border: 1px solid #999;
+  border-radius: 2px;
+  background: #f4f4f4;
+  color: #111;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1.1;
+}
+.generate-button:hover { background: #e7e7e7; }
+.generate-button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.form-error {
+  max-width: 280px;
+  margin: 0 auto 12px;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.board-wrapper { display: flex; justify-content: center; overflow: auto; padding: 2px; }
+
+.board {
+  display: grid;
+  width: min(90vw, 430px);
+  aspect-ratio: 1;
+  border: 1px solid #555;
+  background: #000;
+}
+
+.cell {
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: clamp(8px, 1.7vw, 16px);
+  line-height: 1;
+  transition: background-color 80ms linear;
+}
+
+.cell-light { background: #fff; }
+.cell-dark { background: #000; }
+.cell-knight { color: #e00000; font-weight: 800; }
+.cell-hover-valid { background: #48d66f !important; }
+.cell-hover-invalid { background: #e00000 !important; }
+
+@media (max-width: 480px) {
+  .page { padding-top: 20px; }
+  .game-card h1 { font-size: 20px; }
+  .board { width: 94vw; }
+}

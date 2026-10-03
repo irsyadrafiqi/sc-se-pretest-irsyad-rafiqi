@@ -1,0 +1,44 @@
+FUNCTION findMaxInMin(arr, groupLength)
+
+    IF arr is null OR groupLength <= 0 OR groupLength > length(arr) THEN
+        RETURN null
+    END IF
+
+    maxOfMinimums = -infinity
+
+    FOR startIndex FROM 0 TO length(arr) - groupLength
+        currentMinimum = arr[startIndex]
+
+        FOR offset FROM 1 TO groupLength - 1
+            currentValue = arr[startIndex + offset]
+
+            IF currentValue < currentMinimum THEN
+                currentMinimum = currentValue
+            END IF
+        END FOR
+
+        IF currentMinimum > maxOfMinimums THEN
+            maxOfMinimums = currentMinimum
+        END IF
+    END FOR
+
+    RETURN maxOfMinimums
+END FUNCTION
+
+Example:
+arr = [8, 1, 6, 3, 66, 1, 8, 5]
+groupLength = 3
+
+Windows:
+[8,1,6]   -> 1
+[1,6,3]   -> 1
+[6,3,66]  -> 3
+[3,66,1]  -> 1
+[66,1,8]  -> 1
+[1,8,5]   -> 1
+
+The largest minimum is 3, so the function returns 3.
+
+Complexity:
+- Time: O((n - k + 1) * k)
+- Extra space: O(1)
