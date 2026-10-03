@@ -1,43 +1,51 @@
-FUNCTION findMaxInMin(arr, groupLength)
+function findMaxInMin(arr, groupLength) {
+    if (!arr || groupLength <= 0 || groupLength > arr.length) {
+        return null;
+    }
 
-    IF arr is null OR groupLength <= 0 OR groupLength > length(arr) THEN
-        RETURN null
-    END IF
+    let maxOfMinimums = -Infinity;
 
-    maxOfMinimums = -infinity
+    for (let startIndex = 0; startIndex <= arr.length - groupLength; startIndex++) {
+        let currentMinimum = arr[startIndex];
 
-    FOR startIndex FROM 0 TO length(arr) - groupLength
-        currentMinimum = arr[startIndex]
+        for (let offset = 1; offset < groupLength; offset++) {
+            let currentValue = arr[startIndex + offset];
+            if (currentValue < currentMinimum) {
+                currentMinimum = currentValue;
+            }
+        }
 
-        FOR offset FROM 1 TO groupLength - 1
-            currentValue = arr[startIndex + offset]
+        if (currentMinimum > maxOfMinimums) {
+            maxOfMinimums = currentMinimum;
+        }
+    }
 
-            IF currentValue < currentMinimum THEN
-                currentMinimum = currentValue
-            END IF
-        END FOR
+    return maxOfMinimums;
+}
 
-        IF currentMinimum > maxOfMinimums THEN
-            maxOfMinimums = currentMinimum
-        END IF
-    END FOR
+// Contoh Pengujian
+const arr = [8, 1, 6, 3, 66, 1, 8, 5];
+const groupLength = 3;
 
-    RETURN maxOfMinimums
-END FUNCTION
+console.log("Hasil:", findMaxInMin(arr, groupLength)); // Output yang diharapkan: 3
 
-Example:
+Penjelasan nya:
 arr = [8, 1, 6, 3, 66, 1, 8, 5]
 groupLength = 3
 
-Windows:
-[8,1,6]   -> 1
-[1,6,3]   -> 1
-[6,3,66]  -> 3
-[3,66,1]  -> 1
-[66,1,8]  -> 1
-[1,8,5]   -> 1
+Rincian langkah demi langkah dari setiap kelompoknya
+[8,1,6]   -> 1 // Angka terkecil (minimum) di dalam kelompok
+[1,6,3]   -> 1 // Angka terkecil (minimum) di dalam kelompok
+[6,3,66]  -> 3 // Angka terkecil (minimum) di dalam kelompok
+[3,66,1]  -> 1 // Angka terkecil (minimum) di dalam kelompok
+[66,1,8]  -> 1 // Angka terkecil (minimum) di dalam kelompok
+[1,8,5]   -> 1 // Angka terkecil (minimum) di dalam kelompok
 
-The largest minimum is 3, so the function returns 3.
+Dari seluruh nilai minimum yang terkumpul dari setiap kelompok, yaitu [1, 1, 3, 1, 1, 1],
+program kemudian mencari nilai yang paling besar (maximum of minimums).
+
+Nilai terbesar dari kumpulan angka minimum tersebut adalah 3. 
+Itulah sebabnya fungsi ini mengembalikan hasil akhir 3.
 
 Complexity:
 - Time: O((n - k + 1) * k)
